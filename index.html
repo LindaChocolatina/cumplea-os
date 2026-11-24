@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¡Feliz cumpleaños!</title>
+  <meta name="description" content="Tarjeta de cumpleaños: la foto de los seis años, un deseo para los 41 y dos juegos con universos paralelos.">
+  <meta property="og:title" content="¡Feliz cumpleaños!">
+  <meta property="og:description" content="Perdón, llegué tarde, pero llegué.">
+  <meta property="og:image" content="original.jpeg">
+  <meta name="theme-color" content="#ff8a9a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎂%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="preload" as="image" href="original.jpeg">
+</head>
+<body>
+  <canvas id="confeti" aria-hidden="true"></canvas>
+  <div class="fondo" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="globos" id="globos"></div>
+
+  <dialog class="llegada" id="llegada" aria-labelledby="llegada-titulo">
+    <p class="sobre">Antes de la fiesta</p>
+    <h2 id="llegada-titulo">Perdón, llegué tarde, pero llegué!</h2>
+    <button class="boton rosa" id="cerrar-llegada" type="button">Cerrar</button>
+  </dialog>
+
+  <div class="hud">
+    <button class="boton blanco activa" id="musica" type="button" aria-pressed="true">Música on</button>
+    <button class="boton rosa" id="mas-fiesta" type="button">Confeti</button>
+  </div>
+
+  <main id="contenido">
+    <div class="guirnalda" id="guirnalda" aria-hidden="true"></div>
+
+    <header class="bloque portada">
+      <p class="sobre">41 vueltas al sol</p>
+      <h1 id="titulo" tabindex="-1"></h1>
+    </header>
+
+    <section class="bloque mesa" aria-label="Foto y pastel">
+      <div class="lado-foto">
+        <figure class="marco" id="marco">
+          <span class="cinta" aria-hidden="true"></span>
+          <span class="sticker" aria-hidden="true">41</span>
+          <div class="lienzo" id="lienzo">
+            <img id="foto-original" class="is-on" src="original.jpeg" width="1600" height="1204" alt="La familia el día en que cumplías seis años">
+          </div>
+        </figure>
+        <p class="dedicatoria">Al ver esa foto de cuando cumplías seis años podemos ver cuánto ha corrido el tiempo y todo lo que hemos cambiado desde entonces. Ojalá esta nueva vuelta al sol llegue con calma, que encuentres el espacio para cumplir tus sueños y anhelos, y que nunca falte el bienestar y la buena compañía en familia. ¡Feliz cumpleaños!</p>
+      </div>
+
+      <div class="tarjeta lado-pastel" id="tarjeta-pastel">
+        <p class="sobre">La mesa</p>
+        <h2>Pide un deseo</h2>
+        <p class="ayuda">Sopla las velitas y pide un deseo</p>
+        <div class="pastel" id="pastel">
+          <div class="velas" id="velas"></div>
+          <div class="piso piso-arriba"></div>
+          <div class="piso piso-abajo"></div>
+          <div class="plato"></div>
+        </div>
+        <p class="estado-velas" id="estado-velas" aria-live="polite">El 41 está encendido.</p>
+        <div class="medidor" id="medidor" hidden>
+          <span id="barra"></span>
+        </div>
+        <div class="fila-botones">
+          <button class="boton rosa" id="soplar-una" type="button">Soplar una</button>
+          <button class="boton" id="soplar-todas" type="button">Soplar todas</button>
+          <button class="boton blanco" id="micro" type="button" aria-pressed="false">Escuchar soplido</button>
+        </div>
+        <div class="deseo" id="deseo" hidden>
+          <p id="deseo-texto"></p>
+          <button class="boton blanco" id="reencender" type="button">Encender de nuevo</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloque" id="seccion-quiz" aria-labelledby="titulo-album">
+      <p class="sobre">El álbum</p>
+      <h2 id="titulo-album">Nosotros en distintos universos paralelos</h2>
+      <p class="ayuda">Adivina en qué mundo estamos</p>
+      <div class="tarjeta juego-quiz">
+        <p class="quiz-paso" id="quiz-paso">1 / 10</p>
+        <div class="quiz-marco">
+          <img id="quiz-img" alt="Foto familiar en un universo paralelo" width="1200" height="896">
+          <span class="cuenta-atras" id="cuenta-atras" aria-hidden="true">3</span>
+        </div>
+        <p class="pregunta">¿En qué universo estamos?</p>
+        <div class="opciones" id="opciones"></div>
+        <p class="quiz-estado" id="quiz-estado" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="titulo-memoria">
+      <p class="sobre">El juego</p>
+      <h2 id="titulo-memoria">Concéntrese</h2>
+      <p class="ayuda">Hay dos cartas de cada universo. Tócalas y encuentra las parejas.</p>
+      <p class="quiz-paso" id="memoria-estado">Parejas: 0 / 10</p>
+      <div class="tablero" id="tablero"></div>
+      <p class="quiz-estado" id="memoria-final" aria-live="polite"></p>
+      <button class="boton reiniciar" id="reiniciar-memoria" type="button">Jugar otra vez</button>
+    </section>
+
+    <section class="bloque">
+      <div class="tarjeta cine-tarjeta">
+        <p class="sobre">Y uno más</p>
+        <h2>Así nos veríamos en un universo cinematográfico, ¿sabes cuál es?</h2>
+        <div class="cine" id="cine">
+          <img class="cine-sombra" src="version Harry Potter.jpg" width="1200" height="896" alt="" aria-hidden="true">
+          <img class="cine-color" src="version Harry Potter.jpg" width="1200" height="896" alt="La familia en un universo cinematográfico">
+        </div>
+        <p class="cine-nombre" id="cine-nombre" hidden>¡Así es, Harry Potter!</p>
+        <button class="boton rosa" id="replay-cine" type="button">Revela</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/fiesta.js"></script>
+</body>
+</html>
