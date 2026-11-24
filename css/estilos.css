@@ -725,12 +725,12 @@ dialog.llegada h2 {
 }
 
 .cine.revelando .cine-color {
-  animation: abrir-circulo 13s ease-out forwards;
+  animation: abrir-circulo 13s linear forwards;
 }
 
 @keyframes abrir-circulo {
   from { clip-path: circle(0% at 50% 46%); }
-  to { clip-path: circle(80% at 50% 46%); }
+  to { clip-path: circle(78% at 50% 46%); }
 }
 
 .cine-nombre {
